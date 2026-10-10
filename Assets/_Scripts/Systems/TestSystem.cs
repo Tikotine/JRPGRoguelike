@@ -5,6 +5,7 @@ public class TestSystem : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private HandView handView;
+    [SerializeField] private CardData cardData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,8 +17,9 @@ public class TestSystem : MonoBehaviour
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)
         { 
-        CardView cardView = CardViewCreator.Instance.CreateCardView(transform.position, Quaternion.identity);
-        StartCoroutine(handView.AddCard(cardView));        
+            Card card = new(cardData);
+            CardView cardView = CardViewCreator.Instance.CreateCardView(card, transform.position, Quaternion.identity);
+            StartCoroutine(handView.AddCard(cardView));        
         }
     }
 }

@@ -9,4 +9,16 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text mana;
     [SerializeField] private SpriteRenderer imageSR;
     [SerializeField] private GameObject wrapperGO;
+
+    public Card Card { get; private set; }
+
+    //Constructor for the CardView Based on the "Card"'s information
+    public void Setup(Card card)
+    {
+        Card = card;
+        title.text = card.Title;
+        description.text = card.Desciption;
+        mana.text = card.Mana.ToString();
+        imageSR.sprite = card.Image;
+    }
 }
