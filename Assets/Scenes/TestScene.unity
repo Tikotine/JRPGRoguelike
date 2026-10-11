@@ -149,6 +149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 822915289}
+  - {fileID: 1217083908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
@@ -288,6 +289,116 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &407470585
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1401115297}
+    m_Modifications:
+    - target: {fileID: 1173902637980987835, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944010198838203302, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_Name
+      value: CardViewHover
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944010198838203302, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25709
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.88062
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9848078
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.17364816
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595287577343607305, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7432807214589913660, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2180684594499829311, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3057866617661951887, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+--- !u!114 &407470586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3451910494096993783, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+  m_PrefabInstance: {fileID: 407470585}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72419afc91f7dd34c8def2ed8d03a29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardView
+--- !u!4 &407470587 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3153317588902148706, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
+  m_PrefabInstance: {fileID: 407470585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +897,51 @@ Transform:
   - {fileID: 1313958499}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1217083907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217083908}
+  - component: {fileID: 1217083909}
+  m_Layer: 0
+  m_Name: CardViewHoverSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1217083908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217083907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47483245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217083909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217083907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13305686c307164782b879ba8e86c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardViewHoverSystem
+  cardViewHover: {fileID: 407470586}
 --- !u!1 &1313958496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1165,7 @@ Transform:
   m_Children:
   - {fileID: 697462829}
   - {fileID: 534867903}
+  - {fileID: 407470587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921687867

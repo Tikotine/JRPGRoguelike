@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CardView : MonoBehaviour
 {
@@ -20,5 +21,17 @@ public class CardView : MonoBehaviour
         description.text = card.Desciption;
         mana.text = card.Mana.ToString();
         imageSR.sprite = card.Image;
+    }
+
+    private void OnMouseEnter()
+    {
+        wrapperGO.SetActive(false);
+        Vector3 pos = new(transform.position.x, transform.position.y, -0.5f);   //Adjust where the hover will appear here
+        CardViewHoverSystem.Instance.Show(Card, pos);
+    }
+    private void OnMouseExit() 
+    {
+        CardViewHoverSystem.Instance.Hide();
+        wrapperGO.SetActive(true);
     }
 }
