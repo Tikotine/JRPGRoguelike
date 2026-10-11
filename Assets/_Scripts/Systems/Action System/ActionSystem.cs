@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 
 public class ActionSystem : Singleton<ActionSystem>
 {
+    //https://www.youtube.com/watch?v=ls5zeiDCfvI 11:10
+
     private List<GameAction> reactions = null;  //To reference the lists inside GameActions. Reference the list of the current phase so the reactions can be added
     public bool IsPerforming { get; private set; } = false;     //For allowing interactions with cards when the system is/is not performing
     private static Dictionary<Type, List<Action<GameAction>>> preSubs = new();    //Subscribers to the pre-phase of the game action (Before a game action)
