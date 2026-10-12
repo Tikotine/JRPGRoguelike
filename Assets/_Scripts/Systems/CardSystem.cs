@@ -6,7 +6,12 @@ using UnityEngine.UIElements;
 
 public class CardSystem : Singleton<CardSystem>
 {
-    [SerializeField] private int freshHandCardCount = 5;
+    [Header("Values")]
+    [SerializeField] private int  freshHandCardCount = 5;
+
+    [Header("Tweens")]
+    [SerializeField] private float discardFinalScaleDuration = 0.15f;
+    [SerializeField] private float discardFinalMoveDuration = 0.15f;
 
     [SerializeField] private HandView handView;
     [SerializeField] private Transform drawPilePoint;
@@ -81,12 +86,14 @@ public class CardSystem : Singleton<CardSystem>
     //Call them as a reaction to the EnemyTurnGA
     private void EnemyTurnPreReaction(EnemyTurnGA enemyTurnGA)
     {
+        Debug.Log("Enemy Turn Pre");
         DiscardAllCardsGA discardAllCardsGA = new();
         ActionSystem.Instance.AddReaction(discardAllCardsGA);
     }
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
+        Debug.Log("Enemy Turn Post");
         DrawCardsGA drawCardsGA = new(freshHandCardCount);
         ActionSystem.Instance.AddReaction(drawCardsGA);
     }
@@ -109,9 +116,8 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DiscardCard(CardView cardView)
     {
-        cardView.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).SetEase(Ease.OutQuart, 0.1f);
-        cardView.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.OutQuart, 0.2f);
-        Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.3f).SetEase(Ease.OutQuart, 0.3f);
+        cardView.transform.DOScale(Vector3.zero, discardFinalScaleDuration).SetEase(Ease.OutQuart);
+        Tween tween = cardView.transform.DOMove(discardPilePoint.position, discardFinalMoveDuration).SetEase(Ease.OutQuart);
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
     }

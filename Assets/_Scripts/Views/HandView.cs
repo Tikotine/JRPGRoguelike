@@ -7,6 +7,11 @@ using UnityEngine.Splines;
 
 public class HandView : MonoBehaviour
 {
+    [Header("Tweens")]
+    [SerializeField] private float addCardDuration = 0.15f;
+    [SerializeField] private float removeCardDuration = 0.15f;
+
+
     [SerializeField] private SplineContainer splineContainer;
     private readonly List<CardView> cards = new();
 
@@ -14,7 +19,7 @@ public class HandView : MonoBehaviour
     public IEnumerator AddCard(CardView cardView)
     { 
         cards.Add(cardView);
-        yield return UpdateCardPositions(0.15f);
+        yield return UpdateCardPositions(addCardDuration);
 
         yield break;
     }
@@ -28,7 +33,7 @@ public class HandView : MonoBehaviour
             return null;
         }
         cards.Remove(cardView);
-        StartCoroutine(UpdateCardPositions(0.2f));  //Timing here
+        StartCoroutine(UpdateCardPositions(removeCardDuration));  //Timing here
         return cardView;
     }
 
@@ -61,7 +66,7 @@ public class HandView : MonoBehaviour
             Vector3 up = spline.EvaluateUpVector(p);
             Quaternion rotation = Quaternion.LookRotation(-up, Vector3.Cross(-up, forward).normalized);
             cards[i].transform.DOMove(splinePosition + transform.position + 0.01f * i * Vector3.back, duration).SetEase(Ease.OutQuart, 0.2f);
-            cards[i].transform.DORotate(rotation.eulerAngles, duration).SetEase(Ease.OutQuart, 0.2f);
+            cards[i].transform.DORotate(rotation.eulerAngles, duration).SetEase(Ease.OutQuart);
         }
 
         yield return new WaitForSeconds(duration);
