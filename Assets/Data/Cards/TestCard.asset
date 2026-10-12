@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   <Description>k__BackingField: weewoo
   <Mana>k__BackingField: 3
-  <Image>k__BackingField: {fileID: 21300000, guid: 72e2bafa449cb7547aeeec7a4d71fb1f, type: 3}
+  <Image>k__BackingField: {fileID: 21300000, guid: 12d4ad19a7ed61d4f98a3ce722979c2e, type: 3}

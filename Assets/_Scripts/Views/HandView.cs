@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -16,6 +17,25 @@ public class HandView : MonoBehaviour
         yield return UpdateCardPositions(0.15f);
 
         yield break;
+    }
+
+    //Takes the card as parameter then removes it from hand after checking where it is
+    public CardView RemoveCard(Card card)
+    {
+        CardView cardView = GetCardView(card);
+        if (cardView == null)
+        {
+            return null;
+        }
+        cards.Remove(cardView);
+        StartCoroutine(UpdateCardPositions(0.2f));  //Timing here
+        return cardView;
+    }
+
+    //Looks for the card in all cardviews
+    private CardView GetCardView(Card card)
+    {
+        return cards.Where(cardView => cardView.Card == card).FirstOrDefault();
     }
 
     //Handle the position of the cards in the players hand
