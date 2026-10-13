@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class CardView : MonoBehaviour
 {
@@ -17,6 +16,8 @@ public class CardView : MonoBehaviour
     //Store pos and rotation in the moment we start to drag
     private Vector3 dragStartPosition;
     private Quaternion dragStartRotation;
+    private bool isHovering;
+    private bool isDragging;
 
     public Card Card { get; private set; }
 
@@ -30,7 +31,40 @@ public class CardView : MonoBehaviour
         imageSR.sprite = card.Image;
     }
 
-    private void OnMouseEnter()
+    private void Update()
+    {
+        bool pointerOverThis = PlayerInput.Instance.TryGetColliderUnderPointer(out Collider hit)
+            && hit.gameObject == gameObject;
+
+        if (pointerOverThis && !isHovering)
+        {
+            isHovering = true;
+            OnPointerEnter();
+        }
+        else if (!pointerOverThis && isHovering)
+        {
+            isHovering = false;
+            OnPointerExit();
+        }
+
+        if (!isDragging && pointerOverThis && PlayerInput.Instance.WasClickPressedThisFrame())
+        {
+            OnPointerDown();
+        }
+
+        if (isDragging && PlayerInput.Instance.IsClickHeld())
+        {
+            OnPointerDrag();
+        }
+
+        if (isDragging && PlayerInput.Instance.WasClickReleasedThisFrame())
+        {
+            isDragging = false;
+            OnPointerUp();
+        }
+    }
+
+    private void OnPointerEnter()
     {
         if (!Interactions.Instance.PlayerCanHover())
         {
@@ -41,7 +75,7 @@ public class CardView : MonoBehaviour
         Vector3 pos = new(transform.position.x, transform.position.y, -0.5f);   //Adjust where the hover will appear here
         CardViewHoverSystem.Instance.Show(Card, pos);
     }
-    private void OnMouseExit() 
+    private void OnPointerExit() 
     {
         if (!Interactions.Instance.PlayerCanHover())
         {
@@ -52,13 +86,14 @@ public class CardView : MonoBehaviour
         wrapperGO.SetActive(true);
     }
 
-    private void OnMouseDown()
+    private void OnPointerDown()
     {
         if (!Interactions.Instance.PlayerCanInteract())
         {
             return;
         }
 
+        isDragging = true;
         Interactions.Instance.PlayerIsDragging = true;
         wrapperGO.SetActive(true);
         CardViewHoverSystem.Instance.Hide();
@@ -68,11 +103,11 @@ public class CardView : MonoBehaviour
         dragStartRotation = transform.rotation;
 
         //Set values
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.Euler(20, 0, 0);
         transform.position = MouseUtil.GetMousePositionInWorldSpace();  //Tutorial put -1 to be closet to the orthographic camera
     }
 
-    private void OnMouseDrag()
+    private void OnPointerDrag()
     {
         if (!Interactions.Instance.PlayerCanInteract())
         {
@@ -82,7 +117,7 @@ public class CardView : MonoBehaviour
         transform.position = MouseUtil.GetMousePositionInWorldSpace();
     }
 
-    private void OnMouseUp()
+    private void OnPointerUp()
     {
         if (!Interactions.Instance.PlayerCanInteract())
         {
