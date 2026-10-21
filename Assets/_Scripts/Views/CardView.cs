@@ -9,6 +9,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text mana;
     [SerializeField] private SpriteRenderer imageSR;
     [SerializeField] private GameObject wrapperGO;
+    [SerializeField] private LayerMask dropLayer;
 
     [Header("Values")]
     [SerializeField] private float cardPlayDistance = 10f;
@@ -124,10 +125,12 @@ public class CardView : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance))
+        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance, dropLayer))
         {
             //Play Card
             Debug.Log("Play Card");
+            PlayCardGA playCardGA = new(Card);
+            ActionSystem.Instance.Perform(playCardGA);
         }
 
         else

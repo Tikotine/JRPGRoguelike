@@ -233,6 +233,10 @@ MonoBehaviour:
   mana: {fileID: 8586930976731106993}
   imageSR: {fileID: 5300515757847816358}
   wrapperGO: {fileID: 8305646558742196144}
+  dropLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  cardPlayDistance: 10
 --- !u!210 &1173902637980987835
 SortingGroup:
   m_ObjectHideFlags: 0
