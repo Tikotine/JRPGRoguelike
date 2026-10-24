@@ -125,7 +125,7 @@ public class CardView : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance, dropLayer))
+        if (ManaSystem.Instance.HasEnoughMana(Card.Mana) && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance, dropLayer))
         {
             //Play Card
             Debug.Log("Play Card");
