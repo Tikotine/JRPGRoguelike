@@ -10,8 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38edfc7df25483449965da24c9ecf74, type: 3}
-  m_Name: TestCard 1
+  m_Name: Draw
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  <Description>k__BackingField: zgdxfhdxfg
-  <Mana>k__BackingField: 5
+  <Description>k__BackingField: Draw
+  <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: bc887966935771b45a6d73c49a083c11, type: 3}
+  <Effects>k__BackingField:
+  - rid: 3752420427323932960
+  references:
+    version: 2
+    RefIds:
+    - rid: 3752420427323932960
+      type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        drawAmount: 2

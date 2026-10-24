@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using SerializeReferenceEditor;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Card")]
 
@@ -8,4 +10,5 @@ public class CardData : ScriptableObject
     [field: SerializeField] public Sprite Image { get; private set; }
 
     //More data like effects etc go here
+    [field: SerializeReference, SR] public List<Effect> Effects { get; private set; }
 }

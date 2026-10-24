@@ -92,6 +92,14 @@ public class CardSystem : Singleton<CardSystem>
         yield return DiscardCard(cardView);
 
         //Perform Effects
+        //Iterate through the list of effects and create a PerformEffectGA for each effect
+        foreach (var effect in playCardGA.Card.Effects)
+        {
+            PerformEffectGA performEffectGA = new(effect);
+            //DO NOT USE THE PERFORM METHOD BECAUSE WE ARE IN ANOTHER PERFORMER
+            //If we want to perform a GameAction inside another GameAction's performer, we must always use the AddReaction method
+            ActionSystem.Instance.AddReaction(performEffectGA);
+        }
     }
 
     //Reactions
