@@ -12,7 +12,7 @@ public class CardViewCreator : Singleton<CardViewCreator>
     //Method to create the card views
     public CardView CreateCardView(Card card, Vector3 position, Quaternion rotation)
     { 
-        CardView cardView = Instantiate(cardViewPrefab, position, rotation);
+        CardView cardView = Instantiate(cardViewPrefab, position, rotation, Camera.main.transform);
 
         cardView.transform.localScale = Vector3.zero;
         cardView.transform.DOScale(overshootScale, 0.2f);
