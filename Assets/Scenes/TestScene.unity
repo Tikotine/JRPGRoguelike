@@ -202,6 +202,7 @@ Transform:
   - {fileID: 937735295}
   - {fileID: 744824324}
   - {fileID: 29880298}
+  - {fileID: 2044828231}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105910047
@@ -1448,24 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef1ec35cfea0f249ba04b7736a25739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchSetupSystem
-  deckData:
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
-  - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
+  heroData: {fileID: 11400000, guid: 65949d431775b4c46a22c6f8d6be8513, type: 2}
 --- !u!1 &937735294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,6 +2368,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardViewCreator
   cardViewPrefab: {fileID: 3451910494096993783, guid: 81e57c8fa43a4204d98ff36ca6411b4b, type: 3}
   overshootScale: {x: 1.1, y: 1.1, z: 1.1}
+--- !u!1 &2044828230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044828231}
+  - component: {fileID: 2044828232}
+  m_Layer: 0
+  m_Name: HeroSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044828231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044828230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47483245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044828232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044828230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4dcb18e840517b42bbb8dd39c0851c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroSystem
+  <HeroView>k__BackingField: {fileID: 7323614685548826362}
 --- !u!1001 &2665656469178338212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2507,6 +2536,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
+--- !u!114 &7323614685548826362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 526037490053559082, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
+  m_PrefabInstance: {fileID: 7323614685548826361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fded6738501b644889fd8280c2c2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartyView
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -5,11 +5,11 @@ public class EnemyView : CombatantView
 {
     [SerializeField] private TMP_Text attackText;
     public int AttackPower { get; set; }
-    public void Setup()
+    public void Setup(EnemyData enemyData)
     { 
-        AttackPower = 10;   //Dummy data, to be replaced
+        AttackPower = enemyData.AttackPower;
         UpdateAttackText();
-        SetupBase(CurrentHealth, null);
+        SetupBase(enemyData.Health, enemyData.Image);
     }
 
     private void UpdateAttackText()
