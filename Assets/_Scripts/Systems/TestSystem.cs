@@ -14,18 +14,4 @@ public class TestSystem : MonoBehaviour
     {
         CardSystem.Instance.Setup(deckData);
     }
-
-    public void EndPlayerTurn()
-    {
-        if (ActionSystem.Instance.IsPerforming)
-        { 
-            return;      
-        }
-
-        endTurnButton.interactable = false;
-        ActionSystem.Instance.Perform(new EnemyTurnGA(), () =>
-        {
-            endTurnButton.interactable = true;
-        });
-    }
 }
