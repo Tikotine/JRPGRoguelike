@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38edfc7df25483449965da24c9ecf74, type: 3}
-  m_Name: TestCard
+  m_Name: AOE
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   <Description>k__BackingField: Damage all enemies
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: 12d4ad19a7ed61d4f98a3ce722979c2e, type: 3}
-  <Effects>k__BackingField:
-  - rid: 3752420571871445085
+  <ManualTargetEffect>k__BackingField:
+    rid: -2
+  <OtherEffects>k__BackingField:
+  - <TargetMode>k__BackingField:
+      rid: 4239687206001180774
+    <Effect>k__BackingField:
+      rid: 4239687206001180768
   references:
     version: 2
     RefIds:
-    - rid: 3752420571871445085
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4239687206001180768
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 10
+        damageAmount: 2
+    - rid: 4239687206001180774
+      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+      data: 

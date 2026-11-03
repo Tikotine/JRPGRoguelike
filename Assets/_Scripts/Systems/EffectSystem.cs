@@ -17,7 +17,7 @@ public class EffectSystem : MonoBehaviour
     private IEnumerator PerformEffectPerformer(PerformEffectGA performEffectGA)
     { 
         //Create a GameAction from the effects with the GetGameAction method
-        GameAction effectAction = performEffectGA.Effect.GetGameAction();
+        GameAction effectAction = performEffectGA.Effect.GetGameAction(performEffectGA.Targets);
         ActionSystem.Instance.AddReaction(effectAction);
         yield return null;
     }

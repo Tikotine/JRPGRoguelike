@@ -76,7 +76,6 @@ public class CardSystem : Singleton<CardSystem>
     {
         foreach (var card in hand)
         {
-            discardPile.Add(card);
             CardView cardView = handView.RemoveCard(card);
             yield return DiscardCard(cardView);
         }
@@ -97,9 +96,10 @@ public class CardSystem : Singleton<CardSystem>
 
         //Perform Effects
         //Iterate through the list of effects and create a PerformEffectGA for each effect
-        foreach (var effect in playCardGA.Card.Effects)
+        foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {
-            PerformEffectGA performEffectGA = new(effect);
+            List<CombatantView> targets = effectWrapper.TargetMode.GetTargets();
+            PerformEffectGA performEffectGA = new(effectWrapper.Effect, targets);
             //DO NOT USE THE PERFORM METHOD BECAUSE WE ARE IN ANOTHER PERFORMER
             //If we want to perform a GameAction inside another GameAction's performer, we must always use the AddReaction method
             ActionSystem.Instance.AddReaction(performEffectGA);
@@ -140,6 +140,7 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DiscardCard(CardView cardView)
     {
+        discardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero, discardFinalScaleDuration).SetEase(Ease.OutQuart);
         Tween tween = cardView.transform.DOMove(discardPilePoint.position, discardFinalMoveDuration).SetEase(Ease.OutQuart);
         yield return tween.WaitForCompletion();
