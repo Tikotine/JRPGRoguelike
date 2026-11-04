@@ -22,6 +22,7 @@ public class ManualTargetSystem : Singleton<ManualTargetSystem>
             && hit.collider != null
             && hit.transform.TryGetComponent(out EnemyView enemyView))
         {
+            //Debug.Log(hit.point);
             return enemyView;
         }
 
