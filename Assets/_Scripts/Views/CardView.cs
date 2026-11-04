@@ -94,6 +94,8 @@ public class CardView : MonoBehaviour
             return;
         }
 
+        isDragging = true;
+
         if (Card.ManualTargetEffect != null)
         {
             //If manual targeting mode on, start with card views current pos
@@ -102,7 +104,6 @@ public class CardView : MonoBehaviour
 
         else 
         {
-            isDragging = true;
             Interactions.Instance.PlayerIsDragging = true;
             wrapperGO.SetActive(true);
             CardViewHoverSystem.Instance.Hide();
@@ -143,7 +144,7 @@ public class CardView : MonoBehaviour
 
         if (Card.ManualTargetEffect != null)
         {
-            EnemyView target = ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(-1));
+            EnemyView target = ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace());
             if (target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana))
             {
                 PlayCardGA playCardGA = new(Card, target);

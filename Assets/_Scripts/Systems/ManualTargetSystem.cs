@@ -8,12 +8,14 @@ public class ManualTargetSystem : Singleton<ManualTargetSystem>
     //Activate and set positon of arrow
     public void StartTargeting(Vector3 startPosition)
     {
+        Debug.Log("Manual Target Start");
         arrowView.gameObject.SetActive(true);
         arrowView.SetupArrow(startPosition);
     }
 
     public EnemyView EndTargeting(Vector3 endPosition)
     {
+        Debug.Log("Manual Target End");
         arrowView.gameObject.SetActive(false);
 
         if (Physics.Raycast(endPosition, Vector3.forward, out RaycastHit hit, 10f, targetLayerMask)
