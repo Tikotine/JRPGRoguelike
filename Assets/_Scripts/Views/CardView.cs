@@ -94,23 +94,39 @@ public class CardView : MonoBehaviour
             return;
         }
 
-        isDragging = true;
-        Interactions.Instance.PlayerIsDragging = true;
-        wrapperGO.SetActive(true);
-        CardViewHoverSystem.Instance.Hide();
-        
-        //Store initial values
-        dragStartPosition = transform.position;
-        dragStartRotation = transform.rotation;
+        if (Card.ManualTargetEffect != null)
+        {
+            //If manual targeting mode on, start with card views current pos
+            ManualTargetSystem.Instance.StartTargeting(transform.position);
+        }
 
-        //Set values
-        transform.rotation = Quaternion.Euler(20, 0, 0);
-        transform.position = MouseUtil.GetMousePositionInWorldSpace();  //Tutorial put -1 to be closet to the orthographic camera
+        else 
+        {
+            isDragging = true;
+            Interactions.Instance.PlayerIsDragging = true;
+            wrapperGO.SetActive(true);
+            CardViewHoverSystem.Instance.Hide();
+
+            //Store initial values
+            dragStartPosition = transform.position;
+            dragStartRotation = transform.rotation;
+
+            //Set values
+            transform.rotation = Quaternion.Euler(20, 0, 0);
+            transform.position = MouseUtil.GetMousePositionInWorldSpace();  //Tutorial put -1 to be closet to the orthographic camera
+        }
+
     }
 
     private void OnPointerDrag()
     {
         if (!Interactions.Instance.PlayerCanInteract())
+        {
+            return;
+        }
+
+        //Just have the arrow, dont drag the card
+        if (Card.ManualTargetEffect != null)
         {
             return;
         }
@@ -125,19 +141,32 @@ public class CardView : MonoBehaviour
             return;
         }
 
-        if (ManaSystem.Instance.HasEnoughMana(Card.Mana) && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance, dropLayer))
+        if (Card.ManualTargetEffect != null)
         {
-            //Play Card
-            Debug.Log("Play Card");
-            PlayCardGA playCardGA = new(Card);
-            ActionSystem.Instance.Perform(playCardGA);
+            EnemyView target = ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(-1));
+            if (target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana))
+            {
+                PlayCardGA playCardGA = new(Card, target);
+                ActionSystem.Instance.Perform(playCardGA);
+            }
         }
 
-        else
+        else 
         {
-            transform.position = dragStartPosition;
-            transform.rotation = dragStartRotation;
+            if (ManaSystem.Instance.HasEnoughMana(Card.Mana) && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, cardPlayDistance, dropLayer))
+            {
+                //Play Card
+                Debug.Log("Play Card");
+                PlayCardGA playCardGA = new(Card);
+                ActionSystem.Instance.Perform(playCardGA);
+            }
+
+            else
+            {
+                transform.position = dragStartPosition;
+                transform.rotation = dragStartRotation;
+            }
+            Interactions.Instance.PlayerIsDragging = false;
         }
-        Interactions.Instance.PlayerIsDragging = false;
     }
 }

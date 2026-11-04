@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4922228329562898181}
   - component: {fileID: 4948059605686808756}
   - component: {fileID: 7691714251243823838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 6291494654356932011}
   - component: {fileID: 4121686018456846172}
   - component: {fileID: 3872992750261056227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,6 +263,18 @@ PrefabInstance:
     - target: {fileID: 168953620901032856, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
       propertyPath: m_Name
       value: CombatantViewBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 168953620901032856, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262740791027039733, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310435015056116040, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4932571058548993409, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
       propertyPath: m_LocalPosition.x

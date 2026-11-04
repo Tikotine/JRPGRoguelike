@@ -95,6 +95,15 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.Instance.AddReaction(spendManaGA);
 
         //Perform Effects
+        //Check if theres a manual target effect
+        //Other effects will always be called regardless of the manual target effect
+        if (playCardGA.Card.ManualTargetEffect != null)
+        {
+            //Pass the effect and target
+            PerformEffectGA performEffectGA = new(playCardGA.Card.ManualTargetEffect, new() { playCardGA.ManualTarget });
+            ActionSystem.Instance.AddReaction(performEffectGA);
+        }
+
         //Iterate through the list of effects and create a PerformEffectGA for each effect
         foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {

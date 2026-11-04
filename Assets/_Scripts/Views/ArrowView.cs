@@ -18,7 +18,7 @@ public class ArrowView : MonoBehaviour
         arrowHead.transform.right = direction;
     }
 
-    private void SetupArrow(Vector3 startPosition)
+    public void SetupArrow(Vector3 startPosition)
     { 
         this.startPosition = startPosition;
         lineRenderer.SetPosition(0, startPosition);
