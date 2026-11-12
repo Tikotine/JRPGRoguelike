@@ -51,7 +51,7 @@ public class EnemySystem : Singleton<EnemySystem>
         attacker.transform.DOMoveX(attacker.transform.position.x + 1f, 0.25f); //Move back
 
         //Do Damage
-        DealDamageGA dealDamageGA = new(attacker.AttackPower, new() { HeroSystem.Instance.HeroView });  //Attackers damage and list of targets, which is just the hero. Needs to be editted for multiple heros
+        DealDamageGA dealDamageGA = new(attacker.AttackPower, new() { HeroSystem.Instance.HeroView }, attackHeroGA.Caster);  //Attackers damage and list of targets, which is just the hero. Needs to be editted for multiple heros
         ActionSystem.Instance.AddReaction(dealDamageGA);
     }
 
