@@ -197,15 +197,15 @@ Transform:
   - {fileID: 1308143610}
   - {fileID: 1217083908}
   - {fileID: 1615745131}
-  - {fileID: 874704867}
-  - {fileID: 1744490380}
-  - {fileID: 937735295}
-  - {fileID: 744824324}
-  - {fileID: 29880298}
-  - {fileID: 2044828231}
-  - {fileID: 1576087515}
   - {fileID: 1650291055}
+  - {fileID: 1576087515}
+  - {fileID: 744824324}
+  - {fileID: 2044828231}
+  - {fileID: 1744490380}
+  - {fileID: 874704867}
+  - {fileID: 29880298}
   - {fileID: 1577171783}
+  - {fileID: 937735295}
   - {fileID: 912293424}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1133,6 +1133,7 @@ RectTransform:
   m_Children:
   - {fileID: 105910048}
   - {fileID: 1856113024}
+  - {fileID: 755468240}
   m_Father: {fileID: 441378712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1295,6 +1296,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdee943e9e1781f499facb9790dfe42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectSystem
+--- !u!1 &755468239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 755468240}
+  - component: {fileID: 755468242}
+  - component: {fileID: 755468241}
+  m_Layer: 5
+  m_Name: PerksUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &755468240
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755468239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 538778952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60, y: -60}
+  m_SizeDelta: {x: 120, y: 120}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &755468241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755468239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42b926ed5bef714f85e178cc99adcf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerksUI
+  perkUIPrefab: {fileID: 4980239864952070276, guid: c52e86c99794e7f449df22f917db1b7e, type: 3}
+--- !u!114 &755468242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755468239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 12
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &760495362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d414c662d90afa14bb8e6da2fa792797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerkSystem
+  perksUI: {fileID: 755468241}
 --- !u!1 &937735294
 GameObject:
   m_ObjectHideFlags: 0
