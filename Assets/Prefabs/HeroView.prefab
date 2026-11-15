@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PartyView
   healthText: {fileID: 2721289473028702779}
   spriteRenderer: {fileID: 7726180226279018831}
+  statusEffectsUI: {fileID: 9168803643909383849}
 --- !u!1001 &8668698881841917646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,3 +126,14 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1402167937380482945, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
   m_PrefabInstance: {fileID: 8668698881841917646}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9168803643909383849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 536849616470394983, guid: 6d2264907d464ff438905774f3130ff4, type: 3}
+  m_PrefabInstance: {fileID: 8668698881841917646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2333f83844215d478cd93271736e04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusEffectsUI
