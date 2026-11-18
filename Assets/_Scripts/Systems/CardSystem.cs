@@ -6,9 +6,6 @@ using UnityEngine.UIElements;
 
 public class CardSystem : Singleton<CardSystem>
 {
-    [Header("Values")]
-    [SerializeField] private int  freshHandCardCount = 5;
-
     [Header("Tweens")]
     [SerializeField] private float discardFinalScaleDuration = 0.15f;
     [SerializeField] private float discardFinalMoveDuration = 0.15f;
@@ -26,8 +23,6 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreReaction, ReactionTiming.PRE);
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
     private void OnDisable()
@@ -35,8 +30,6 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
-        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreReaction, ReactionTiming.PRE);
-        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
     //Publics
@@ -113,22 +106,6 @@ public class CardSystem : Singleton<CardSystem>
             //If we want to perform a GameAction inside another GameAction's performer, we must always use the AddReaction method
             ActionSystem.Instance.AddReaction(performEffectGA);
         }
-    }
-
-    //Reactions
-    //Call them as a reaction to the EnemyTurnGA
-    private void EnemyTurnPreReaction(EnemyTurnGA enemyTurnGA)
-    {
-        Debug.Log("Enemy Turn Pre");
-        DiscardAllCardsGA discardAllCardsGA = new();
-        ActionSystem.Instance.AddReaction(discardAllCardsGA);
-    }
-
-    private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
-    {
-        Debug.Log("Enemy Turn Post");
-        DrawCardsGA drawCardsGA = new(freshHandCardCount);
-        ActionSystem.Instance.AddReaction(drawCardsGA);
     }
 
     //Helpers

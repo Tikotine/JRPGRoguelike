@@ -193,8 +193,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 822915289}
   - {fileID: 1308143610}
+  - {fileID: 1803207126}
   - {fileID: 1217083908}
   - {fileID: 1615745131}
   - {fileID: 1650291055}
@@ -1536,62 +1536,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2097949436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &822915288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 822915289}
-  - component: {fileID: 822915290}
-  m_Layer: 0
-  m_Name: TestSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &822915289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822915288}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 47483245}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &822915290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822915288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1345b40e1f18d042a2c24b338110365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestSystem
-  deckData:
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  - {fileID: 11400000, guid: 80703d58936973e4f86cff1ecc60478d, type: 2}
-  endTurnButton: {fileID: 105910049}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,7 +2913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934ff5a988092843a6e263325ee742a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSystem
-  freshHandCardCount: 5
   discardFinalScaleDuration: 0.15
   discardFinalMoveDuration: 0.15
   handView: {fileID: 534867904}
@@ -3150,6 +3093,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c5fd9f380a3f841b5da69724bea11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactions
+--- !u!1 &1803207125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1803207126}
+  - component: {fileID: 1803207127}
+  m_Layer: 0
+  m_Name: BurnSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1803207126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803207125}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47483245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1803207127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803207125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1bb1a1219605b498f083e55673749a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BurnSystem
+  burnVFX: {fileID: 9037827232706190844, guid: 1c36fa5f337b59b439d6863f4c388f9f, type: 3}
 --- !u!1 &1836205365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4dcb18e840517b42bbb8dd39c0851c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroSystem
+  freshHandCardCount: 5
   <HeroView>k__BackingField: {fileID: 7323614685548826362}
 --- !u!1 &2097949435
 GameObject:
