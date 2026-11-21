@@ -9,7 +9,7 @@ public class Interactions : Singleton<Interactions>
     //Returns true when action system is not perofrming
     public bool PlayerCanInteract()
     {
-        if (!ActionSystem.Instance.IsPerforming)
+        if (!ActionSystem.Instance.IsPerforming && !ActionSystem.Instance.IsStopped)
         {
             return true;
         }

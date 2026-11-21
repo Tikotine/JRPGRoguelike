@@ -13,8 +13,10 @@ public class CardSystem : Singleton<CardSystem>
     [SerializeField] private HandView handView;
     [SerializeField] private Transform drawPilePoint;
     [SerializeField] private Transform discardPilePoint;
-    private readonly List<Card> drawPile = new();
-    private readonly List<Card> discardPile = new();
+    private readonly Dictionary<HeroView, HeroDeck> heroDecks = new();
+    private readonly HeroDeck sharedDeck = new();
+    private HeroDeck activeDeck;
+    private HeroDeck ActiveDeck => activeDeck != null ? activeDeck : sharedDeck;
     private readonly List<Card> hand = new();
 
 
@@ -38,7 +40,41 @@ public class CardSystem : Singleton<CardSystem>
         foreach (var cardData in deckData)
         {
             Card card = new(cardData);
-            drawPile.Add(card);
+            sharedDeck.DrawPile.Add(card);
+        }
+
+        if (activeDeck == null)
+        {
+            activeDeck = sharedDeck;
+        }
+    }
+
+    //Build this hero's own draw pile from their HeroData deck.
+    public void SetupHero(HeroView hero)
+    {
+        if (hero == null)
+        {
+            return;
+        }
+
+        HeroDeck deck = new();
+        if (hero.Data != null && hero.Data.Deck != null)
+        {
+            foreach (CardData cardData in hero.Data.Deck)
+            {
+                deck.DrawPile.Add(new Card(cardData));
+            }
+        }
+
+        heroDecks.Add(hero, deck);
+    }
+
+    //Draws and discards on the hero whose turn it is.
+    public void SetActiveHero(HeroView hero)
+    {
+        if (hero != null && heroDecks.TryGetValue(hero, out HeroDeck deck))
+        {
+            activeDeck = deck;
         }
     }
 
@@ -46,7 +82,7 @@ public class CardSystem : Singleton<CardSystem>
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
         //Calculate how many cards can be drawn from the deck efore the deck needs to e reshuffled
-        int actualAmount = Mathf.Min(drawCardsGA.Amount, drawPile.Count);
+        int actualAmount = Mathf.Min(drawCardsGA.Amount, ActiveDeck.DrawPile.Count);
         int notDrawnAmount = drawCardsGA.Amount - actualAmount; //To be drawn after the reshuffle
         for (int i = 0; i < actualAmount; i++)
         {
@@ -111,7 +147,7 @@ public class CardSystem : Singleton<CardSystem>
     //Helpers
     private IEnumerator DrawCard()
     {
-        Card card = drawPile.Draw();
+        Card card = ActiveDeck.DrawPile.Draw();
         hand.Add(card);
         CardView cardView = CardViewCreator.Instance.CreateCardView(card, drawPilePoint.position, drawPilePoint.rotation);
         yield return handView.AddCard(cardView);
@@ -120,16 +156,22 @@ public class CardSystem : Singleton<CardSystem>
     //Adds all cards from discard pile to draw pile and clears list
     private void RefillDeck()
     {
-        drawPile.AddRange(discardPile);
-        discardPile.Clear();
+        ActiveDeck.DrawPile.AddRange(ActiveDeck.DiscardPile);
+        ActiveDeck.DiscardPile.Clear();
     }
 
     private IEnumerator DiscardCard(CardView cardView)
     {
-        discardPile.Add(cardView.Card);
+        ActiveDeck.DiscardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero, discardFinalScaleDuration).SetEase(Ease.OutQuart);
         Tween tween = cardView.transform.DOMove(discardPilePoint.position, discardFinalMoveDuration).SetEase(Ease.OutQuart);
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
+    }
+
+    private sealed class HeroDeck
+    {
+        public readonly List<Card> DrawPile = new();
+        public readonly List<Card> DiscardPile = new();
     }
 }

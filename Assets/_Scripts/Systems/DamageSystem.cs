@@ -32,10 +32,12 @@ public class DamageSystem : MonoBehaviour
                     ActionSystem.Instance.AddReaction(killEnemyGA);
                 }
 
-                else 
+                else if (target is HeroView heroView)
                 {
                     //Player hero view death
                     //If no more hero views trigger game over
+                    KillHeroGA killHeroGA = new(heroView);
+                    ActionSystem.Instance.AddReaction(killHeroGA);
                 }
             }
         }

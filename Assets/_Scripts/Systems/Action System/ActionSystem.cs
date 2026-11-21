@@ -10,12 +10,13 @@ public class ActionSystem : Singleton<ActionSystem>
 
     private List<GameAction> reactions = null;  //To reference the lists inside GameActions. Reference the list of the current phase so the reactions can be added
     public bool IsPerforming { get; private set; } = false;     //For allowing interactions with cards when the system is/is not performing
+    public bool IsStopped { get; private set; } = false;    //Set when the match is won or lost so no further turns start
     private static Dictionary<Type, List<Action<GameAction>>> preSubs = new();    //Subscribers to the pre-phase of the game action (Before a game action)
     private static Dictionary<Type, List<Action<GameAction>>> postSubs = new();   //Subscribers to the post-phase of the game action (After a game action)
     private static Dictionary<Type, Func<GameAction, IEnumerator>> performers = new();  //Hold the logic for game actions. Game actions only contain data, no logic. For each type, attach a performer that is called when an action of that type is performed.
     public void Perform(GameAction action, System.Action OnPerformFinished = null)      //Give an action and an optional callback that is called when Perform is completed
     {
-        if (IsPerforming)   //Only run when no other action is performing
+        if (IsStopped || IsPerforming)   //Only run when no other action is performing
         { 
             return;
         }
@@ -25,8 +26,17 @@ public class ActionSystem : Singleton<ActionSystem>
         {
             //On Flow completed
             IsPerforming = false;
-            OnPerformFinished?.Invoke();
+            if (!IsStopped)
+            {
+                OnPerformFinished?.Invoke();
+            }
         }));
+    }
+
+    //The match is over. Finish whatever action is already running, but do not start another turn.
+    public void Stop()
+    {
+        IsStopped = true;
     }
 
     //Gives the ability to add reactions from other classes. Always adds to the CURRENT list

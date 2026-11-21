@@ -5,10 +5,6 @@ using UnityEngine.UI;
 //Decides whose turn it is from speed and action value, and shows that order on the action bar.
 public class ActionBarSystem : Singleton<ActionBarSystem>
 {
-    [Header("References")]
-    [SerializeField] private Slider actionBarUIPrefab;
-    [SerializeField] private RectTransform actionBarsUI;
-
     [Header("Layout")]
     [SerializeField] private int maxActionBarUIs = 5;
     [SerializeField] private float imageSpacing = 0.05f;
@@ -25,11 +21,13 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
     private void OnEnable()
     {
         ActionSystem.SubscribeReaction<KillEnemyGA>(OnEnemyKilled, ReactionTiming.PRE);
+        ActionSystem.SubscribeReaction<KillHeroGA>(OnHeroKilled, ReactionTiming.PRE);
     }
 
     private void OnDisable()
     {
         ActionSystem.UnsubscribeReaction<KillEnemyGA>(OnEnemyKilled, ReactionTiming.PRE);
+        ActionSystem.UnsubscribeReaction<KillHeroGA>(OnHeroKilled, ReactionTiming.PRE);
     }
 
     //Builds a unit for every hero and enemy already spawned, then starts the first turn.
@@ -56,6 +54,11 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
     //The end turn button calls this. Enemy turns ignore it and advance on their own.
     public void EndHeroTurn()
     {
+        if (ActionSystem.Instance.IsStopped)
+        {
+            return;
+        }
+
         if (activeUnit == null || !activeUnit.IsHero)
         {
             return;
@@ -73,6 +76,11 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
     //The unit with the lowest action value is the one whose turn it is.
     private void BeginActiveTurn()
     {
+        if (ActionSystem.Instance.IsStopped)
+        {
+            return;
+        }
+
         activeUnit = GetLowestUnit(null);
         if (activeUnit == null)
         {
@@ -93,6 +101,11 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
     //At the end of a turn, time advances by the acting unit's action value, then that unit waits a full base action value again.
     private void CompleteActiveTurn()
     {
+        if (ActionSystem.Instance.IsStopped)
+        {
+            return;
+        }
+
         if (activeUnit != null)
         {
             //A unit killed on their own turn is already off the roster, but time still advances by the action value they spent.
@@ -148,17 +161,38 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
         RebuildActionBars();
     }
 
+    private void OnHeroKilled(KillHeroGA killHeroGA)
+    {
+        ActionBarUnit killedUnit = null;
+        foreach (ActionBarUnit unit in units)
+        {
+            if (unit.Hero == killHeroGA.HeroView)
+            {
+                killedUnit = unit;
+                break;
+            }
+        }
+
+        if (killedUnit == null)
+        {
+            return;
+        }
+
+        units.Remove(killedUnit);
+        RebuildActionBars();
+    }
+
     //imageSpacing is the buffer left below the last portrait. imageInterval is the gap between two portraits.
     private void CalculateImageInterval()
     {
-        if (actionBarUIPrefab == null)
+        if (!ActionBarUICreator.Instance.HasReferences)
         {
             imageInterval = 0f;
             return;
         }
 
-        sliderMin = actionBarUIPrefab.minValue;
-        sliderMax = actionBarUIPrefab.maxValue;
+        sliderMin = ActionBarUICreator.Instance.MinValue;
+        sliderMax = ActionBarUICreator.Instance.MaxValue;
 
         int gaps = maxActionBarUIs - 1;
         if (gaps <= 0)
@@ -332,26 +366,18 @@ public class ActionBarSystem : Singleton<ActionBarSystem>
 
     private bool CanBuildBars()
     {
-        if (actionBarUIPrefab != null && actionBarsUI != null)
+        if (ActionBarUICreator.Instance.HasReferences)
         {
             return true;
         }
 
-        Debug.LogError("ActionBarSystem is missing the ActionBarUI prefab or the ActionBarsUI parent.");
+        Debug.LogError("ActionBarUICreator is missing the ActionBarUI prefab or the ActionBarsUI parent.");
         return false;
     }
 
     private void CreateActionBar(ActionBarUnit unit)
     {
-        Slider bar = Instantiate(actionBarUIPrefab, actionBarsUI);
-        bar.interactable = false;
-
-        Transform characterImageTransform = bar.transform.Find("Handle Slide Area/Handle/CharacterImage");
-        if (characterImageTransform != null && characterImageTransform.TryGetComponent(out Image characterImage))
-        {
-            characterImage.sprite = unit.View.ActionBarImage;
-        }
-
+        Slider bar = ActionBarUICreator.Instance.CreateActionBarUI(unit.View.ActionBarImage);
         actionBarUIs.Add(bar);
     }
 

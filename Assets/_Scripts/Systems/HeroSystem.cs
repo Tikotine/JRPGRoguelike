@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,63 +6,63 @@ public class HeroSystem : Singleton<HeroSystem>
 {
     [Header("Values")]
     [SerializeField] private int freshHandCardCount = 5;
+    [SerializeField] private HeroBoardView heroBoardView;
 
-    [field: SerializeField] public HeroView HeroView { get; private set; }
-    [SerializeField] private List<HeroView> additionalHeroViews = new();
+    //The hero whose turn is currently being played. Falls back to the first living hero.
+    private HeroView activeHero;
+    public HeroView HeroView
+    {
+        get
+        {
+            if (activeHero != null && activeHero.CurrentHealth > 0)
+            {
+                return activeHero;
+            }
 
-    //Every hero that was set up for this match. The inspector hero is first, then any extra views.
-    private readonly List<HeroView> heroes = new();
-    public IReadOnlyList<HeroView> Heroes => heroes;
+            foreach (HeroView hero in Heroes)
+            {
+                if (hero != null && hero.CurrentHealth > 0)
+                {
+                    return hero;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public IReadOnlyList<HeroView> Heroes => heroBoardView.HeroViews;
 
     private void OnEnable()
     {
         ActionSystem.SubscribeReaction<HeroTurnEndGA>(HeroTurnEndReaction, ReactionTiming.PRE);
         ActionSystem.SubscribeReaction<HeroTurnStartGA>(HeroTurnStartReaction, ReactionTiming.PRE);
+        ActionSystem.AttachPerformer<KillHeroGA>(KillHeroPerformer);
     }
 
     private void OnDisable()
     {
         ActionSystem.UnsubscribeReaction<HeroTurnEndGA>(HeroTurnEndReaction, ReactionTiming.PRE);
         ActionSystem.UnsubscribeReaction<HeroTurnStartGA>(HeroTurnStartReaction, ReactionTiming.PRE);
+        ActionSystem.DetachPerformer<KillHeroGA>();
     }
 
     public void Setup(List<HeroData> heroDatas)
     {
-        heroes.Clear();
         if (heroDatas == null)
         {
             Debug.Log("No Hero Datas");
             return;
         }
 
-        //Pair each hero data with a view. The inspector hero is first, then any extra views dragged in for later heroes.
-        List<HeroView> views = new();
-        if (HeroView != null)
+        foreach (HeroData heroData in heroDatas)
         {
-            views.Add(HeroView);
-        }
-
-        if (additionalHeroViews != null)
-        {
-            foreach (HeroView extraHero in additionalHeroViews)
-            {
-                if (extraHero != null && !views.Contains(extraHero))
-                {
-                    views.Add(extraHero);
-                }
-            }
-        }
-
-        int count = Mathf.Min(heroDatas.Count, views.Count);
-        for (int i = 0; i < count; i++)
-        {
-            if (heroDatas[i] == null)
+            if (heroData == null)
             {
                 continue;
             }
 
-            views[i].Setup(heroDatas[i]);
-            heroes.Add(views[i]);
+            heroBoardView.AddHero(heroData);
         }
     }
 
@@ -77,6 +78,9 @@ public class HeroSystem : Singleton<HeroSystem>
     private void HeroTurnStartReaction(HeroTurnStartGA heroTurnStartGA)
     {
         HeroView hero = heroTurnStartGA.Hero != null ? heroTurnStartGA.Hero : HeroView;
+        activeHero = hero;
+        CardSystem.Instance.SetActiveHero(hero);
+
         int burnStacks = hero.GetStatusEffectStacks(StatusEffectType.BURN);
         if (burnStacks > 0)
         { 
@@ -87,5 +91,15 @@ public class HeroSystem : Singleton<HeroSystem>
         Debug.Log("Hero Turn Start");
         DrawCardsGA drawCardsGA = new(freshHandCardCount);
         ActionSystem.Instance.AddReaction(drawCardsGA);
+    }
+
+    private IEnumerator KillHeroPerformer(KillHeroGA killHeroGA)
+    {
+        if (activeHero == killHeroGA.HeroView)
+        {
+            activeHero = null;
+        }
+
+        yield return heroBoardView.RemoveHero(killHeroGA.HeroView);
     }
 }

@@ -210,6 +210,7 @@ Transform:
   - {fileID: 937735295}
   - {fileID: 912293424}
   - {fileID: 1071530492}
+  - {fileID: 1900000012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77503000
@@ -1670,6 +1671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchSetupSystem
   heroDatas:
   - {fileID: 11400000, guid: 8934220f0d3020544970b210853ef304, type: 2}
+  - {fileID: 11400000, guid: 65949d431775b4c46a22c6f8d6be8513, type: 2}
   perkData: {fileID: 11400000, guid: b3e9ed467a303f94294e75ef004c93e4, type: 2}
   enemyDatas:
   - {fileID: 11400000, guid: 7b5dabdc8347d614bb94a04361b7a29d, type: 2}
@@ -1685,6 +1687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905776181}
+  - component: {fileID: 905776182}
   m_Layer: 0
   m_Name: HeroBoardView
   m_TagString: Untagged
@@ -1701,7 +1704,7 @@ Transform:
   m_GameObject: {fileID: 905776180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 4.25}
+  m_LocalPosition: {x: -5, y: 0, z: 4.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1711,6 +1714,23 @@ Transform:
   - {fileID: 1383050882}
   m_Father: {fileID: 1401115297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905776182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905776180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a64789a0b1c2d3e4f5a6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroBoardView
+  slots:
+  - {fileID: 441037403}
+  - {fileID: 77503001}
+  - {fileID: 1366677246}
+  - {fileID: 1383050882}
 --- !u!1 &912293423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,13 +1926,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020735127}
+  - component: {fileID: 1020735128}
   m_Layer: 0
   m_Name: HeroViewCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1020735127
 Transform:
   m_ObjectHideFlags: 0
@@ -1928,6 +1949,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1921687868}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020735128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020735126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d3e4f5a6b74890b1c2d3e4f5a6b7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroViewCreator
+  heroViewPrefab: {fileID: 526037490053559082, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
 --- !u!1 &1071530491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1642140501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6591216b0b78af45b5a11bc63e6e17d, type: 3}
+  m_Script: {fileID: 11500000, guid: d3e4f5a6b7c84901c2d3e4f5a6b7c8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchStateSystem
 --- !u!1 &1650291054
@@ -3462,10 +3496,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3e1b94f2d4c648a8e05b7d1c9f3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActionBarSystem
-  actionBarUIPrefab: {fileID: 3363849201324369389, guid: 780aaa3485a6ff6439d440e0bcdb487a, type: 3}
-  actionBarsUI: {fileID: 599059513}
   maxActionBarUIs: 5
   imageSpacing: 0.05
+--- !u!1 &1900000011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900000012}
+  - component: {fileID: 1900000013}
+  m_Layer: 0
+  m_Name: MatchStateSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900000012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900000011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47483245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900000011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e4f5a6b7c84901c2d3e4f5a6b7c8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MatchStateSystem
 --- !u!1 &1921687867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3574,7 @@ Transform:
   - {fileID: 1959658560}
   - {fileID: 1500515585}
   - {fileID: 1020735127}
+  - {fileID: 1900000022}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1959658559
@@ -3591,8 +3668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroSystem
   freshHandCardCount: 5
-  <HeroView>k__BackingField: {fileID: 7323614685548826362}
-  additionalHeroViews: []
+  heroBoardView: {fileID: 905776182}
 --- !u!1 &2097949435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,7 +3695,7 @@ Transform:
   m_GameObject: {fileID: 2097949435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 4.25}
+  m_LocalPosition: {x: 5, y: 0, z: 4.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3766,22 +3842,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4872009117495994246, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
---- !u!114 &7323614685548826362 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 526037490053559082, guid: bd8f1a47507140645b6807219e7317ba, type: 3}
-  m_PrefabInstance: {fileID: 7323614685548826361}
+--- !u!1 &1900000021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900000022}
+  - component: {fileID: 1900000023}
+  m_Layer: 0
+  m_Name: ActionBarUICreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900000022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900000021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1921687868}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900000023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900000021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5fded6738501b644889fd8280c2c2c9, type: 3}
+  m_Script: {fileID: 11500000, guid: e4f5a6b7c8d94a12d3e4f5a6b7c8d9e0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PartyView
+  m_EditorClassIdentifier: Assembly-CSharp::ActionBarUICreator
+  actionBarUIPrefab: {fileID: 3363849201324369389, guid: 780aaa3485a6ff6439d440e0bcdb487a, type: 3}
+  actionBarsUI: {fileID: 599059513}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
