@@ -11,14 +11,14 @@ public class ManaSystem : Singleton<ManaSystem>
     {
         ActionSystem.AttachPerformer<SpendManaGA>(SpendManaPerformer);
         ActionSystem.AttachPerformer<RefillManaGA>(RefillManaPerformer);
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.SubscribeReaction<HeroTurnStartGA>(HeroTurnStartReaction, ReactionTiming.PRE);
     }
 
     private void OnDisable()
     {
         ActionSystem.DetachPerformer<SpendManaGA>();
         ActionSystem.DetachPerformer<RefillManaGA>();
-        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.UnsubscribeReaction<HeroTurnStartGA>(HeroTurnStartReaction, ReactionTiming.PRE);
     }
 
     public bool HasEnoughMana(int mana)
@@ -40,7 +40,8 @@ public class ManaSystem : Singleton<ManaSystem>
         yield return null;
     }
 
-    private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
+    //Refill when a hero's turn starts, including each later hero once more than one is in the match.
+    private void HeroTurnStartReaction(HeroTurnStartGA heroTurnStartGA)
     {
         RefillManaGA refillManaGA = new();
         ActionSystem.Instance.AddReaction(refillManaGA);

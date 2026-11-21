@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Titanic
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   <Image>k__BackingField: {fileID: 21300000, guid: 70a8cbddd9f71324d9f47f2cace7eafa, type: 3}
+  <ActionBarImage>k__BackingField: {fileID: 21300000, guid: 70a8cbddd9f71324d9f47f2cace7eafa, type: 3}
   <Health>k__BackingField: 15
   <AttackPower>k__BackingField: 4
+  <Speed>k__BackingField: 100

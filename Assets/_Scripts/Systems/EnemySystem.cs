@@ -11,6 +11,7 @@ public class EnemySystem : Singleton<EnemySystem>
     private void OnEnable()
     {
         ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
+        ActionSystem.AttachPerformer<EnemyActGA>(EnemyActPerformer);
         ActionSystem.AttachPerformer<AttackHeroGA>(AttackHeroPerformer);
         ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
     }
@@ -18,6 +19,7 @@ public class EnemySystem : Singleton<EnemySystem>
     private void OnDisable()
     {
         ActionSystem.DetachPerformer<EnemyTurnGA>();
+        ActionSystem.DetachPerformer<EnemyActGA>();
         ActionSystem.DetachPerformer<AttackHeroGA>();
         ActionSystem.DetachPerformer<KillEnemyGA>();
     }
@@ -45,6 +47,22 @@ public class EnemySystem : Singleton<EnemySystem>
             AttackHeroGA attackHeroGA = new(enemy);
             ActionSystem.Instance.AddReaction(attackHeroGA);
         }
+        yield return null;
+    }
+
+    //The action bar asks one enemy to act. Burn ticks first, then they attack.
+    private IEnumerator EnemyActPerformer(EnemyActGA enemyActGA)
+    {
+        EnemyView enemy = enemyActGA.Enemy;
+        int burnStacks = enemy.GetStatusEffectStacks(StatusEffectType.BURN);
+        if (burnStacks > 0)
+        {
+            ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
+            ActionSystem.Instance.AddReaction(applyBurnGA);
+        }
+
+        AttackHeroGA attackHeroGA = new(enemy);
+        ActionSystem.Instance.AddReaction(attackHeroGA);
         yield return null;
     }
 

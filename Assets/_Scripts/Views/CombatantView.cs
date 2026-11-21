@@ -10,11 +10,17 @@ public class CombatantView : MonoBehaviour
     [SerializeField] private StatusEffectsUI statusEffectsUI;
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
+    public int Speed { get; private set; }
+    public Sprite ActionBarImage { get; private set; }
+    //Honkai Star Rail base action value. Higher speed means a smaller value and an earlier turn.
+    public float BaseActionValue => 10000f / Mathf.Max(Speed, 1);
     private Dictionary<StatusEffectType, int> statusEffects = new();
 
-    protected void SetupBase(int health, Sprite image)
+    protected void SetupBase(int health, Sprite image, int speed, Sprite actionBarImage)
     {
         MaxHealth = CurrentHealth = health;
+        Speed = speed;
+        ActionBarImage = actionBarImage;
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }

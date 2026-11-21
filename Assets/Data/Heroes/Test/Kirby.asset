@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Kirby
   m_EditorClassIdentifier: Assembly-CSharp::HeroData
   <Image>k__BackingField: {fileID: 21300000, guid: 52d38c98b4dfb2d46b1d229c0d312035, type: 3}
+  <ActionBarImage>k__BackingField: {fileID: 21300000, guid: 52d38c98b4dfb2d46b1d229c0d312035, type: 3}
   <Health>k__BackingField: 44
+  <Speed>k__BackingField: 110
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}
   - {fileID: 11400000, guid: cac6f77eb128dd84ca8f4447490dd7a8, type: 2}

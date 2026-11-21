@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class MatchSetupSystem : MonoBehaviour
 {
-    [SerializeField] private HeroData heroData;     //EDIT THIS TO BE A LIST IN FUTURE
+    [SerializeField] private List<HeroData> heroDatas; //Heroes fighting this match
     [SerializeField] private PerkData perkData;
     [SerializeField] private List<EnemyData> enemyDatas;
 
     private void Start()
     {
-        HeroSystem.Instance.Setup(heroData);
+        HeroSystem.Instance.Setup(heroDatas);
         EnemySystem.Instance.Setup(enemyDatas);
-        CardSystem.Instance.Setup(heroData.Deck);
+        if (heroDatas != null && heroDatas.Count > 0)
+        {
+            CardSystem.Instance.Setup(heroDatas[0].Deck);
+        }
         PerkSystem.Instance.AddPerk(new Perk(perkData));
-        DrawCardsGA drawCardsGA = new(5);
-        ActionSystem.Instance.Perform(drawCardsGA);
+        ActionBarSystem.Instance.BeginBattle();
     }
 }
