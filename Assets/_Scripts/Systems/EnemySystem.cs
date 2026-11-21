@@ -44,8 +44,12 @@ public class EnemySystem : Singleton<EnemySystem>
                 ActionSystem.Instance.AddReaction(applyBurnGA);
             }
 
-            AttackHeroGA attackHeroGA = new(enemy);
-            ActionSystem.Instance.AddReaction(attackHeroGA);
+            HeroView target = GetRandomLivingHero();
+            if (target != null)
+            {
+                AttackHeroGA attackHeroGA = new(enemy, target);
+                ActionSystem.Instance.AddReaction(attackHeroGA);
+            }
         }
         yield return null;
     }
@@ -61,8 +65,12 @@ public class EnemySystem : Singleton<EnemySystem>
             ActionSystem.Instance.AddReaction(applyBurnGA);
         }
 
-        AttackHeroGA attackHeroGA = new(enemy);
-        ActionSystem.Instance.AddReaction(attackHeroGA);
+        HeroView target = GetRandomLivingHero();
+        if (target != null)
+        {
+            AttackHeroGA attackHeroGA = new(enemy, target);
+            ActionSystem.Instance.AddReaction(attackHeroGA);
+        }
         yield return null;
     }
 
@@ -76,8 +84,31 @@ public class EnemySystem : Singleton<EnemySystem>
         attacker.transform.DOMoveX(attacker.transform.position.x + 1f, 0.25f); //Move back
 
         //Do Damage
-        DealDamageGA dealDamageGA = new(attacker.AttackPower, new() { HeroSystem.Instance.HeroView }, attackHeroGA.Caster);  //Attackers damage and list of targets, which is just the hero. Needs to be editted for multiple heros
-        ActionSystem.Instance.AddReaction(dealDamageGA);
+        if (attackHeroGA.Target != null && attackHeroGA.Target.CurrentHealth > 0)
+        {
+            DealDamageGA dealDamageGA = new(attacker.AttackPower, new() { attackHeroGA.Target }, attackHeroGA.Caster);
+            ActionSystem.Instance.AddReaction(dealDamageGA);
+        }
+    }
+
+    //Pick one hero who is still alive. Returns null when the party is already defeated.
+    private HeroView GetRandomLivingHero()
+    {
+        List<HeroView> livingHeroes = new();
+        foreach (HeroView hero in HeroSystem.Instance.Heroes)
+        {
+            if (hero != null && hero.CurrentHealth > 0)
+            {
+                livingHeroes.Add(hero);
+            }
+        }
+
+        if (livingHeroes.Count == 0)
+        {
+            return null;
+        }
+
+        return livingHeroes[Random.Range(0, livingHeroes.Count)];
     }
 
     private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
